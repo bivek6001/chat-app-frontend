@@ -68,7 +68,7 @@ const Left = () => {
 
     async function sendMessage(e){
         e.preventDefault();
-        const response=await axios.post(`http://localhost:9000/message/send/${selectedUser._id}`,{message:body})
+        const response=await axios.post(`https://chat-app-backend-qf9p.onrender.com/${selectedUser._id}`,{message:body})
         // console.log(response);
         setBody("");
         dispatch(setMessages([...messages,response.data.newMessage]));

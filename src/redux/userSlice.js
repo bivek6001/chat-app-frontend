@@ -5,7 +5,7 @@ import axios from "axios";
 
 
 export const fetchUser= createAsyncThunk("suggested/fetch",async()=>{
-    const response= await axios.get("http://localhost:9000/user/suggested")
+    const response= await axios.get("https://chat-app-backend-qf9p.onrender.com/user/suggested")
     return response.data.suggestedUsers
     
 })

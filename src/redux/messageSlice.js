@@ -7,7 +7,7 @@ const initialState = {
 
 
 export const fetchMessages= createAsyncThunk("fetch/messages",async(id)=>{
-    const res= await axios.get(`http://localhost:9000/message/get/${id}`);
+    const res= await axios.get(`https://chat-app-backend-qf9p.onrender.com/message/get/${id}`);
     console.log(res.data.messages);
  return res.data.messages;
 
