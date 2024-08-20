@@ -4,9 +4,13 @@ import axios from 'axios';
 import {useSelector,useDispatch} from "react-redux"
 import { authUser } from '../../redux/userSlice';
 import { useNavigate } from 'react-router-dom';
+import { LuLoader2 } from "react-icons/lu";
+// import {setLoading} from "../../redux/userSlice.js"
  axios.defaults.withCredentials= true;
 const Auth = () => {
   const [page,setPage]= useState(true);
+  const [loading,setLoading] = useState(false);
+  // const loading= useSelector((state)=>state.user.loading);
   const [credentials,setCredentials]= useState({
    
   });
@@ -18,6 +22,7 @@ const Auth = () => {
       
       if(page){
        try {
+        setLoading(true);
         const res= await axios.post("https://chat-app-backend-qf9p.onrender.com/user/signin",credentials,{
           withCredentials:true,
         })
@@ -38,6 +43,10 @@ const Auth = () => {
         toast.error(error.response.data.message)
         console.log(error.response.data.message)
         
+       }
+       finally{
+        setLoading(false)
+          // dispatch(setLoading(false));
        }
         
       }
@@ -96,15 +105,19 @@ console.log('Change')
                      <div>
                     
                      </div>
-                        <button className='bg-[#1877F2] w-[364px] h-[48px] font-semibold text-white rounded-md' >{page ? "Login" : "Signup" }</button>
+                     {
+                      loading ? <LuLoader2 size={"50px"} className='animate-spin'/> :
+                        <button className='bg-[#1877F2] w-[364px] h-[48px] font-semibold text-white rounded-md' >{page ? "Login" : "Signup" }</button>}
 
 
                     </form>
                     or
                     <hr/>
-                    <button className='bg-[#42B72A] w-[250px] h-[45px] text-white font-white rounded-md font-medium' onClick={()=>{
-                      setPage(!page)
-                    }}>{page ? "Create new account" : "Existing user" }</button>
+                      <button className='bg-[#42B72A] w-[250px] h-[45px] text-white font-white rounded-md font-medium' onClick={()=>{
+                        setPage(!page)
+                      }}>{page ? "Create new account" : "Existing user" }</button>
+                    
+                 
                 </div>
         </div>
 

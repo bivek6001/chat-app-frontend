@@ -1,6 +1,6 @@
 import { createSlice ,createAsyncThunk} from "@reduxjs/toolkit";
 import axios from "axios";
-
+axios.defaults.withCredentials=true;
 
 
 
@@ -14,7 +14,8 @@ const initialState={
   authUser:null,
   selectedUser:null,
   onlineUser:null,
-  otherUsers:null
+  otherUsers:null,
+  loading:true
  
 }
 const userSlice= createSlice({
@@ -23,6 +24,7 @@ const userSlice= createSlice({
     reducers:{
         authUser:(state,action)=>{
             state.authUser=action.payload
+            
         },
        logout:(state,action)=>{
         state.authUser= null;
@@ -35,6 +37,9 @@ const userSlice= createSlice({
        setOnlineUser:(state,action)=>{
         state.onlineUser=action.payload;
         // console.log("working")
+       },
+       setLoading:(state,action)=>{
+        state.loading=action.payload;
        }
 
     
